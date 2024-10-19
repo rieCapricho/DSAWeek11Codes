@@ -1,0 +1,15 @@
+public class TestBinaryTree {
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        System.out.println("Empty\t: "+tree.isEmpty());
+
+        BinaryTree.Node node=tree.new Node(12);
+
+        tree.add(node,12);
+        tree.add(node,40);
+        tree.add(node,50);
+
+        System.out.println("Empty\t: "+tree.isEmpty());
+        System.out.println("Level Order\t: "+tree.printLevelOrder(node));
+    }//end of main class
+}//end of class
