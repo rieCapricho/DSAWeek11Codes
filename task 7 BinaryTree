@@ -1,0 +1,111 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class BinaryTree {
+
+    private Node root;
+
+    public BinaryTree() {
+        root = null;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
+    }
+
+    public Node getRoot() { return root;}
+
+    public void addNode(int data){
+        root = add(root, data);
+    }
+    public Node add(Node node, int data) {
+        if (isEmpty()) {
+            root = new Node(data);
+        } else {
+            Queue<Node> q = new LinkedList<Node>();
+            q.add(node);
+
+            while (!q.isEmpty()) {
+                node = q.peek();
+                q.remove();
+                if (node.getLeft() == null) {
+                    node.setLeft(new Node(data));
+                    break;
+                } else q.add(node.getLeft());
+
+                if (node.getRight() == null) {
+                    node.setRight(new Node(data));
+                    break;
+                } else q.add(node.getRight());
+            }//end of loop
+        }//end of if
+        return root;
+    }//end of method
+
+    private String printLevelOrder(Node node) {
+        String hold = "";
+        if (isEmpty()) {
+            hold = "Tree is empty";
+        } else {
+            Queue<Node> q = new LinkedList<Node>();
+            q.add(node);
+            while (!q.isEmpty()) {
+                Node newNode = q.poll();
+                hold += newNode.getData() + " ";
+                if (newNode.getLeft() != null)
+                    q.add(newNode.getLeft());
+                if (newNode.getRight() != null)
+                    q.add(newNode.getRight());
+            }//end of while loop
+        }//end of if
+        return hold;
+    }//end of method
+
+    public String printLevelOrder(){return printLevelOrder(root);}
+
+    public int count() {return count(root);}
+    private int count(Node node) {
+        if(node==null)
+            return 0;
+        else{
+            int ctr=1;
+            ctr+=count(node.getLeft());
+            ctr+=count(node.getRight());
+            return ctr;
+        }
+    }
+
+    public String printInOrder(Node node) {
+        String hold = "";
+        if(node==null)
+            return "Tree is empty";
+        else {
+            Stack<Node> s = new Stack<Node>();
+            Node newNode=node;
+            while(!s.empty() || newNode!=null){
+                if(newNode!=null){
+                    s.push(newNode);
+                    newNode=newNode.getLeft();
+                }else {
+                    Node value=s.pop();
+                    hold += value.getData() + " ";
+                    newNode=value.getRight();
+                }//end of if
+            }//end of while
+        }//end of if
+        return hold;
+    }//end of method
+    public String printInOrder(){return inOrder(root);}
+    private String inOrder(Node node){
+        if (node!=null)
+            return inOrder(node.getLeft()) + node.getData() +" "+ inOrder(node.getRight());
+        else return "";
+    }//end of method
+
+    public String traverseInOrder(Node node){
+        if(node!=null)
+            return inOrder(node.getLeft()) + node.getData() +" "+ inOrder(node.getRight());
+        else return "";
+    }
+}//end of outer class
