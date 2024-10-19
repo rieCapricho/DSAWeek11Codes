@@ -1,0 +1,16 @@
+public class TestBinaryTree {
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        System.out.println("Empty\t: "+tree.isEmpty());
+
+        tree.addNode(12);
+        tree.addNode(40);
+        tree.addNode(50);
+
+        System.out.println("Empty\t: "+tree.isEmpty());
+
+        Node root=new Node();
+        root=tree.getRoot();
+        System.out.println("In-Order\t: "+tree.traverseInOrder(root));
+    }//end of main class
+}//end of class
